@@ -10,7 +10,7 @@ In the coming up weeks:
 
 ## Setup
 
-Install Unifi SK
+Install Unifi SDK
 ```js
 npm i unifi-sdk
 ```
