@@ -10,15 +10,13 @@ In the coming up weeks:
 
 ## Setup
 
+Install Unifi SK
 ```js
-const Unifi = require("./sdk/unifi.js");
-const ethers = require("ethers");
-
-let provider = new ethers.providers.JsonRpcProvider(
-  "https://goerli.infura.io/v3/xxxx"
-);
-
-let wallet = new ethers.Wallet("xxxx", provider);
+npm i unifi-sdk
+```
+Get your API key from our Website and pass it as an argument
+```js
+const Unifi = require("unifi-sdk");
 
 let unifiApiKey = "xxxx";
 
@@ -28,6 +26,8 @@ let unifi = Unifi(unifiApiKey);
 ## Methods
 
 ### approve
+Approve uniswap to handle your tokens. This method is required to be executed before you do unifi.uniswap.swap calls
+This call returns an unsignedTxn object which you can sign with your wallet to submit your transaction
 
 ```js
 let unsignedTxn = await unifi.uniswap.approve({
@@ -39,7 +39,7 @@ let unsignedTxn = await unifi.uniswap.approve({
 ```
 
 ### getQuote
-
+Get the best Quotes from Uniswap (V2 and V3). Returns an Object with all essential information about the swap 
 ```js
 let unsignedTxn = await unifi.uniswap.getQuote({
   sellTokenAddress: "0x70cBa46d2e933030E2f274AE58c951C800548AeF",
@@ -50,7 +50,10 @@ let unsignedTxn = await unifi.uniswap.getQuote({
 ```
 
 ### swap
-
+Swaps Tokens, pass in the sellTokenAddress for the token you want to sell and buyTokenAddress for the token you want to buy.
+you can either pass sellTokenAmount or buyTokenAmount depending on your need.
+passing sellTokenAmount results in generating an unsigned transaction object for selling sellTokenAmount worth sellTokens
+passing buyTokenAmount results in generating an unsigned transaction object for buying buyTokenAmount worth buyTokens for respective amount of sellTokens to be sold.
 ```js
 let unsignedTxn = await unifi.uniswap.swap({
   walletAddress: wallet.address,
