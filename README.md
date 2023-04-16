@@ -3,7 +3,7 @@
 UniFi provides makes access to any Defi protocol in just a single line of code. Currently Unifi has integrated Uniswap with methods to do swaps, approve and get swap quote in uniswap all in a single line, as of now we support goerli chain.
 
 In the coming up weeks:
-1) we will be integrating protocols like Aave, 1inch and more methods from Uniswap
+1) We will be integrating protocols like Aave, 1inch and more methods from Uniswap
 2) Creation of AA wallet architecture and provide REST API endpoints
 
 # Uniswap
