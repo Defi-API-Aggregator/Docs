@@ -27,6 +27,7 @@ let unifi = Unifi(unifiApiKey);
 
 ### approve
 Approve uniswap to handle your tokens. This method is required to be executed before you do unifi.uniswap.swap calls
+
 This call returns an unsignedTxn object which you can sign with your wallet to submit your transaction
 
 ```js
@@ -57,6 +58,9 @@ You can either pass sellTokenAmount or buyTokenAmount depending on your need.
 Passing sellTokenAmount results in generating an unsigned transaction object for selling sellTokenAmount worth sellTokens.
 
 Passing buyTokenAmount results in generating an unsigned transaction object for buying buyTokenAmount worth buyTokens for respective amount of sellTokens to be sold.
+
+
+This call returns an unsignedTxn object which you can sign with your wallet to submit your transaction
 ```js
 let unsignedTxn = await unifi.uniswap.swap({
   walletAddress: wallet.address,
