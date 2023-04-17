@@ -52,8 +52,10 @@ let unsignedTxn = await unifi.uniswap.getQuote({
 ### swap
 Swaps Tokens, pass in the sellTokenAddress for the token you want to sell and buyTokenAddress for the token you want to buy.
 you can either pass sellTokenAmount or buyTokenAmount depending on your need.
-passing sellTokenAmount results in generating an unsigned transaction object for selling sellTokenAmount worth sellTokens
-passing buyTokenAmount results in generating an unsigned transaction object for buying buyTokenAmount worth buyTokens for respective amount of sellTokens to be sold.
+
+Passing sellTokenAmount results in generating an unsigned transaction object for selling sellTokenAmount worth sellTokens.
+
+Passing buyTokenAmount results in generating an unsigned transaction object for buying buyTokenAmount worth buyTokens for respective amount of sellTokens to be sold.
 ```js
 let unsignedTxn = await unifi.uniswap.swap({
   walletAddress: wallet.address,
