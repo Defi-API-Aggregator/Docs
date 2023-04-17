@@ -14,7 +14,7 @@ Install Unifi SDK
 ```js
 npm i unifi-sdk
 ```
-Get your API key from our Website and pass it as an argument
+You can use our demo api-key **wutu5laotqfd8ofbn30px8sv7s9g9u3f** and try out Unifi 
 ```js
 const Unifi = require("unifi-sdk");
 
