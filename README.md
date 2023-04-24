@@ -219,10 +219,11 @@ let TIPExecutor = unifi.uniswapTools.targetImpactIntervalPurchase({
 const time = new Date().getTime();
 
 TIPExecutor.runTIPExecutor()
-TIPExecutor.TIPExecutorEvents.on('executionOutput',(response)=>{
+TIPExecutor.TIPExecutorEvents.on('executionOutput',async(response)=>{
     console.log('response',response);
 
-    wallet.sendTransaction(response.unsignedTxnObject);
+    let sentTxn = await wallet.sendTransaction(response.unsignedTxnObject);
+    let receipt = await sentTxn.wait();
     //writing to a file to log events for reference
     fs.appendFile('executionHistory_'+time+'.txt',JSON.stringify(response)+'\n', (err)=>{
         if(err) throw err;
