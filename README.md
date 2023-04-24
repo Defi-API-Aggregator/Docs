@@ -6,7 +6,6 @@ In the coming up weeks:
 1) We will be integrating protocols like Aave, 1inch and more methods from Uniswap
 2) Creation of AA wallet architecture and provide REST API endpoints
 
-# Unifi Uniswap Methods
 
 ## Setup
 
@@ -27,7 +26,9 @@ let unifi = Unifi(demoApiKey);
 
 ## Methods
 
-### approve
+### Uniswap Methods
+
+#### approve
 Approve uniswap to handle your tokens. This method is required to be executed before you do unifi.uniswap.swap calls.
 
 If you do not pass amount, then default value is used. The default value is the maximum value possible in solidity 2^256-1.
@@ -82,7 +83,7 @@ async function execute(){
 execute()
 ```
 
-### getQuote
+#### getQuote
 Get the best Quotes from Uniswap (V2 and V3). Returns an Object with all essential information about the swap 
 ```js
 let unsignedTxn = await unifi.uniswap.getQuote({
@@ -93,7 +94,7 @@ let unsignedTxn = await unifi.uniswap.getQuote({
 });
 ```
 
-### swap
+#### swap
 Swaps Tokens, pass in the sellTokenAddress for the token you want to sell and buyTokenAddress for the token you want to buy.
 
 You can either pass sellTokenAmount or buyTokenAmount depending on your need.
@@ -156,4 +157,24 @@ async function execute(){
 }
 
 execute()
+```
+## Custom  Strategy
+
+### targetImpactIntervalPurchase
+implements a strategy similar to TWAP for swapping large amount of crypto over an interval of time at a targeted price impact in uniswap
+
+The below will return a TIIPExecutor Object with which you can trigger to start the strategy and listen to events
+```js
+let TIIPExecutor = unifi.uniswapTools.targetImpactIntervalPurchase({
+    walletAddress:wallet.address, 
+    sellTokenAddress:'0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599',
+    buyTokenAddress:'0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
+    maximumPriceImpact:0.05,
+    priceImpactTolerance:0.01,
+    desiredChunkSize:"20",
+    targetQuantity:"2000",
+    interval:60000,
+    lowerBoundChunkSize:"10",
+    chainId:1,
+});
 ```
