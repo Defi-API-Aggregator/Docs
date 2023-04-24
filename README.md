@@ -195,12 +195,12 @@ TIPExecutor.TIPExecutorEvents.on('executionOutput',(response)=>{
 Full Implementation
 ```js
 const Unifi = require('unifi-sdk');
-let apiKey = 'wutu5laotqfd8ofbn30px8sv7s9g9u3f'//'wutu5laotqfd8ofbn30px8sv7s9g9u3f'//'2n2323vici73wr3vpoym9z0uqfndmdo5';
+let apiKey = 'your-api-key';
 let unifi = Unifi(apiKey);
 const fs = require('fs'); 
 const ethers = require('ethers');
-let provider =  new ethers.providers.JsonRpcProvider('https://goerli.infura.io/v3/175266848e3a488caba1109816167e8b');
-let wallet = new ethers.Wallet('0xfe69d33a910098943ae2b3d06aacaef612bb45d88972484b95873450cdf64606',provider);
+let provider =  new ethers.providers.JsonRpcProvider('your-provider-url');
+let wallet = new ethers.Wallet('your-private-key',provider);
 
 
 let TIPExecutor = unifi.uniswapTools.targetImpactIntervalPurchase({
@@ -222,10 +222,12 @@ TIPExecutor.runTIPExecutor()
 TIPExecutor.TIPExecutorEvents.on('executionOutput',(response)=>{
     console.log('response',response);
 
+    wallet.sendTransaction(response.unsignedTxnObject);
     //writing to a file to log events for reference
     fs.appendFile('executionHistory_'+time+'.txt',JSON.stringify(response)+'\n', (err)=>{
         if(err) throw err;
     })
+    
 
 })
 ```
