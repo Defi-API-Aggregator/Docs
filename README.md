@@ -178,3 +178,60 @@ let TIIPExecutor = unifi.uniswapTools.targetImpactIntervalPurchase({
     chainId:1,
 });
 ```
+
+The following command with start the strategy
+```js
+TIPExecutor.runTIPExecutor()
+```
+
+The following is essential to listen to events which will contain the required transaction to be sent from your wallet at every interval which you have specified
+```js
+TIPExecutor.TIPExecutorEvents.on('executionOutput',(response)=>{
+    console.log('response',response);
+    //wallet.sendTransaction(response.unsignedTxnObject);
+})
+```
+
+Full Implementation
+```js
+const Unifi = require('unifi-sdk');
+let apiKey = 'wutu5laotqfd8ofbn30px8sv7s9g9u3f'//'wutu5laotqfd8ofbn30px8sv7s9g9u3f'//'2n2323vici73wr3vpoym9z0uqfndmdo5';
+let unifi = Unifi(apiKey);
+const fs = require('fs'); 
+const ethers = require('ethers');
+let provider =  new ethers.providers.JsonRpcProvider('https://goerli.infura.io/v3/175266848e3a488caba1109816167e8b');
+let wallet = new ethers.Wallet('0xfe69d33a910098943ae2b3d06aacaef612bb45d88972484b95873450cdf64606',provider);
+
+
+let TIPExecutor = unifi.uniswapTools.targetImpactIntervalPurchase({
+    walletAddress:wallet.address, 
+    sellTokenAddress:'0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599',
+    buyTokenAddress:'0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
+    maximumPriceImpact:0.05,
+    priceImpactTolerance:0.01,
+    desiredChunkSize:"20",
+    targetQuantity:"2000",
+    interval:60000,
+    lowerBoundChunkSize:"10",
+    chainId:1,
+});
+
+const time = new Date().getTime();
+
+TIPExecutor.runTIPExecutor()
+TIPExecutor.TIPExecutorEvents.on('executionOutput',(response)=>{
+    console.log('response',response);
+
+    //writing to a file to log events for reference
+    fs.appendFile('executionHistory_'+time+'.txt',JSON.stringify(response)+'\n', (err)=>{
+        if(err) throw err;
+    })
+
+})
+```
+
+You can check out the code for the strategy at
+```js
+unifi-sdk/tools/uniswap/TIPExecutor.js
+```
+
