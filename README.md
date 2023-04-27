@@ -1,6 +1,6 @@
 # Unifi Docs
 
-UniFi provides access to any Defi protocol in just a single line of code. Currently Unifi has integrated Uniswap with methods to do swaps, approve and get swap quote in uniswap all in a single line, as of now we support goerli chain.
+UniFi provides access to any Defi protocol in just a single line of code. Currently Unifi has integrated Uniswap with methods to do swaps, approve and get swap quote in uniswap all in a single line.
 
 In the coming up weeks:
 1) We will be integrating protocols like Aave, 1inch and more methods from Uniswap
@@ -27,6 +27,17 @@ let unifi = Unifi(demoApiKey);
 ## Methods
 
 ### Uniswap Methods
+
+Unifi supports the following chains for Uniswap
+```js
+UNISWAP SUPPORTED CHAINS
+GOERLI:5
+ETHEREUM_MAINNET:1
+POLYGON_MAINNET:137
+ARBITRUM_MAINNET:42161
+OPTIMISM_MAINNET:10
+POLYGON_MUMBAI:80001
+```
 
 #### approve
 Approve uniswap to handle your tokens. This method is required to be executed before you do unifi.uniswap.swap calls.
