@@ -28,7 +28,7 @@ let unifi = Unifi(demoApiKey);
 
 ### Uniswap Methods
 
-Unifi supports the following chains for Uniswap, Binance and Celo will be added Soon.
+Unifi supports the following chains for Uniswap
 ```js
 UNISWAP SUPPORTED CHAINS
 GOERLI:5
@@ -37,6 +37,8 @@ POLYGON_MAINNET:137
 ARBITRUM_MAINNET:42161
 OPTIMISM_MAINNET:10
 POLYGON_MUMBAI:80001
+BINANCE: SOON
+CELO: SOON
 ```
 
 #### approve
